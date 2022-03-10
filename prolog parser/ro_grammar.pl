@@ -1,11 +1,12 @@
 %%% RULES
-s(Tree) --> np(Tree,_,_,_).
+s(Tree) --> np(Tree,_,_,_,_).
 
 %% np
-np(t(np, [NOUN]), NUM, GEN, CASE) --> noun(NOUN, def, NUM, GEN, CASE).
-np(t(np, [DET, NOUN]), NUM, GEN, CASE) --> \+ det(DET, indef, sg, fem, gen), det(DET, indef, NUM, GEN, CASE), noun(NOUN, indef, NUM, GEN, nom).
-np(t(np, [DET, NOUN]), sg, fem, gen) --> det(DET, indef, sg, fem, gen), noun(NOUN, indef, pl, fem, nom).
-np(t(np, [NOUN, DET]), NUM, GEN, CASE) --> noun(NOUN, def, NUM, GEN, CASE), det(DET, def, NUM, GEN, CASE).
+np(t(np, [NOUN]), p3, NUM, GEN, CASE) --> noun(NOUN, def, NUM, GEN, CASE).
+np(t(np, [PRONOUN]), PERS, NUM, GEN, CASE) --> pronoun(PRONOUN, PERS, NUM, GEN, CASE).
+np(t(np, [DET, NOUN]), p3, NUM, GEN, CASE) --> \+ det(DET, indef, sg, fem, gen), det(DET, indef, NUM, GEN, CASE), noun(NOUN, indef, NUM, GEN, nom).
+np(t(np, [DET, NOUN]), p3, sg, fem, gen) --> det(DET, indef, sg, fem, gen), noun(NOUN, indef, pl, fem, nom).
+np(t(np, [NOUN, DET]), p3, NUM, GEN, CASE) --> noun(NOUN, def, NUM, GEN, CASE), det(DET, def, NUM, GEN, CASE).
 
 
 % --------------------------------------------------------------------------------
@@ -70,39 +71,55 @@ l_noun(merelor, def, pl, fem, gen).
 
 
 %% pronouns
+pronoun(t(pron, [w(Word)]), PERS, NUM, GEN, CASE) --> [Word], {l_pron(Word, PERS, NUM, GEN, CASE)}.
+pronoun(t(pron, [w(Word)]), p3, NUM, GEN, CASE) --> [Word], {l_det(Word, def, NUM, GEN, CASE)}.
+
+clitic(t(clit, [w(Word)]), PERS, NUM, GEN, CASE) --> [Word], {l_pron(Word, PERS, NUM, GEN, CASE)}.
 
 % (PRONOUN, PERS, NUM, GEN, CASE)
-l_pron(eu, 1, sg, _, nom).
-l_pron(tu, 2, sg, _, nom).
-l_pron(el, 3, sg, masc, nom).
-l_pron(ea, 3, sg, fem, nom).
-l_pron(noi, 1, pl, _, nom).
-l_pron(voi, 2, pl, _, nom).
-l_pron(ei, 3, pl, masc, nom).
-l_pron(ele, 3, pl, fem, nom).
+l_pron(eu, p1, sg, _, nom).
+l_pron(tu, p2, sg, _, nom).
+l_pron(el, p3, sg, masc, nom).
+l_pron(ea, p3, sg, fem, nom).
+l_pron(noi, p1, pl, _, nom).
+l_pron(voi, p2, pl, _, nom).
+l_pron(ei, p3, pl, masc, nom).
+l_pron(ele, p3, pl, fem, nom).
 
-% l_pron(mine, 1, sg, _, acc).
-% l_pron(tine, 2, sg, _, acc).
-% l_pron(el, 3, sg, masc, acc).
-% l_pron(ea, 3, sg, fem, acc).
-% l_pron(noi, 1, pl, _, acc).
-% l_pron(voi, 2, pl, _, acc).
-% l_pron(ei, 3, pl, masc, acc).
-% l_pron(ele, 3, pl, fem, acc).
+% l_pron(mine, p1, sg, _, acc).
+% l_pron(tine, p2, sg, _, acc).
+% l_pron(el, p3, sg, masc, acc).
+% l_pron(ea, p3, sg, fem, acc).
+% l_pron(noi, p1, pl, _, acc).
+% l_pron(voi, p2, pl, _, acc).
+% l_pron(ei, p3, pl, masc, acc).
+% l_pron(ele, p3, pl, fem, acc).
 
-l_clit(mă, 1, sg, _, acc).
-l_clit(te, 2, sg, _, acc).
-l_clit(îl, 3, sg, masc, acc).
-l_clit(o, 3, sg, fem, acc).
-l_clit(ne, 1, pl, _, acc).
-l_clit(vă, 2, pl, _, acc).
-l_clit(îi, 3, pl, masc, acc).
-l_clit(le, 3, pl, fem, acc).
+% clitics
+l_clit(mă, p1, sg, _, acc).
+l_clit(te, p2, sg, _, acc).
+l_clit(îl, p3, sg, masc, acc).
+l_clit(o, p3, sg, fem, acc).
+l_clit(ne, p1, pl, _, acc).
+l_clit(vă, p2, pl, _, acc).
+l_clit(îi, p3, pl, masc, acc).
+l_clit(le, p3, pl, fem, acc).
 
-l_clit(îmi, 1, sg, _, dat).
-l_clit(îți, 2, sg, _, dat).
-l_clit(îi, 3, sg, _, dat).
-l_clit(ne, 1, pl, _, dat).
-l_clit(vă, 2, pl, _, dat).
-l_clit(le, 3, pl, fem, dat).
+l_clit(îmi, p1, sg, _, dat).
+l_clit(îți, p2, sg, _, dat).
+l_clit(îi, p3, sg, _, dat).
+l_clit(ne, p1, pl, _, dat).
+l_clit(vă, p2, pl, _, dat).
+l_clit(le, p3, pl, fem, dat).
 
+
+%% verbs
+
+% (VERB, PERS, NUM)
+% eat
+l_verb(mănânc, p1, sg).
+l_verb(mănânci, p2, sg).
+l_verb(mănâncă, p3, sg).
+l_verb(mâncăm, p1, pl).
+l_verb(mâncați, p2, pl).
+l_verb(mănâncă, p3, pl).
