@@ -55,7 +55,7 @@ u(Id) :-
 
 %% parse a string, and pprint the result
 parse(String) :-
-    s(Tree,String,[]),
+    ip(Tree,String,[]),
     pprint_tree(Tree).
 
 %%% pretty printer to print trees horizontally

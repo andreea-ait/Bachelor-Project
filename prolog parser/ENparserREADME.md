@@ -1,13 +1,13 @@
 # How to use the parser
 
-1. open terminal
-2. run 
+1. open terminal in current directory
+2. run:
 ```
 swipl
 ```
 3. load the parser: 
 ```
-?- reconsult(parser), reconsult(grammar).
+?- reconsult(parser), reconsult(ro_grammar).
 ```
 
 ## Parser commands:
@@ -41,12 +41,5 @@ The parser currently allows a few types of phrases, namely:
     - NP -> DET AP NOUN
     - NP -> AP NOUN_pl
     - NP -> NP PP
-- prepositional phrases:
-    - PP -> PREP NP
-- adjective phrases:
-    - AP -> ADJ
-    - AP -> ADJ AP
-- conjunctions:
-    - S -> S CONJ S
-    - VP -> VP CONJ VP
-    - NP -> NP CONJ NP
+
+
