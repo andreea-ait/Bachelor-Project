@@ -1,0 +1,391 @@
+TOY    RO   CONFIG (1.0)
+  ROOTCAT   IP.
+  FILES  .
+  LEXENTRIES   (TOY RO).
+  RULES   (TOY RO).
+  TEMPLATES   (TOY RO).
+  GOVERNABLERELATIONS    SUBJ OBJ.
+  NONDISTRIBUTIVES    NUM PERS GEN.
+  OPTIMALITYORDER     NOGOOD.
+  CHARACTERENCODING   utf-8.
+
+----
+TOY   RO   RULES (1.0)
+
+"IP -> (SUBJ), I'"
+IP --> (DP: (^ SUBJ) = !
+      	    (! CASE) =c NOM
+	    (! DEF)
+	    ),
+       I': ^=!.
+
+
+"I' -> (CLIT) VP"
+I' --> (Iº: ^=!)
+        VP: ^=!.
+	
+
+"Iº -> CLIT"
+"DOC = doubling object clitic"
+Iº --> Dhat: (^ OBJ) = !
+	     (! DOC) = +.
+	     	
+
+"VP -> V (OBJ)"
+VP --> V: ^=!,
+       (DP: (^ OBJ) = !
+            (! CASE) =c ACC
+	    ).
+
+
+DP --> {
+       "nouns that do not require PE:"
+       "non-animate nouns"
+         D': ^=!
+       	     (^ NTYPE) ~= PROPER
+	     (^ ANIM) = -;
+
+       "nouns with definite article (and no determiner)"
+       | D': ^=!
+       	     (^ NTYPE) ~= PROPER
+	     (^ ANIM) = +
+	     (^ ART) = +
+	     (^ DEM) ~= +;
+
+       "indefinite nouns"
+       | D': ^=!
+       	     (^ NTYPE) ~= PROPER
+	     (^ ANIM) = +
+	     (^ DEF) = -;
+       	   
+       "nouns that require PE:"
+       "proper noun - nominative"
+       | D': (^ NTYPE) = PROPER
+       	     (^ CASE) = NOM;
+
+       "proper noun - accusative"
+       | PRT: (^ DOC) =c +;
+         D': (^ NTYPE) = PROPER
+       	     (^ CASE) = ACC;
+
+       "animate, specific - nominative"
+       | D': (^ ANIM) = +
+       	     (^ DEF) = +
+	     (^ NTYPE) ~= PROPER
+	     (^ DEM) = +
+	     (^ CASE) = NOM;
+
+        "animate, specific - accusative"
+       | PRT: (^ DOC) =c +;
+	 D': (^ ANIM) = +
+       	     (^ DEF) = +
+	     (^ NTYPE) ~= PROPER
+	     (^ DEM) = +
+	     (^ CASE) = ACC;
+       }.
+
+
+D' --> { "definite noun (with definite article) or proper names"
+         "the boy - băiatul"
+	 NP:  (^ DEF) = +
+	      (^ DEM) = -;
+
+	 "noun (with definite article)  + demonstrative (long form)"
+	 "this boy - băiatul acesta"
+       | NP:  (^ DEF) = +
+       	      (^ ART) = +
+              (^ NTYPE) ~= PROPER;
+         DET: (^ DEF) = +
+	      (^ DEM) = +
+       	      (^ FORM) = LONG;
+
+	 "demonstrative (short form) + noun (no article)"
+	 "this boy - acest băiat"
+       | DET: (^ DEF) = +
+       	      (^ DEM) = +
+       	      (^ FORM) = SHORT;
+	 NP:  (^ ART) = -;
+
+	 "indefinite article/determiner + noun (no article)"
+	 "a boy - un băiat"
+       | DET: (^ DEF) = -
+       	      (^ DEM) = -;
+         NP:  (^ ART) = - }.
+
+
+"NP -> NOUN"
+NP --> N.   
+
+----
+TOY   RO   TEMPLATES (1.0)
+
+----
+TOY   RO   LEXICON (1.0)
+
+fată     N  * (^ PRED) = 'GIRL'
+	      (^ NTYPE) = COUNT
+	      (^ NUM) = SG
+	      (^ GEN) = F
+	      (^ PERS) = 3
+	      (^ ART) = -
+	      { (^ CASE) = NOM
+	      | (^ CASE) = ACC }
+	      (^ ANIM) = +.
+
+fata     N  * (^ PRED) = 'GIRL'
+	      (^ NTYPE) = COUNT
+	      (^ NUM) = SG
+	      (^ GEN) = F
+	      (^ PERS) = 3
+	      (^ DEF) = +
+	      (^ ART) = +
+	      { (^ CASE) = NOM
+	      | (^ CASE) = ACC }
+	      (^ ANIM) = +.
+
+băiat    N  * (^ PRED) = 'BOY'
+	      (^ NTYPE) = COUNT
+	      (^ NUM) = SG
+	      (^ GEN) = M
+	      (^ PERS) = 3
+	      (^ ART) = -
+	      { (^ CASE) = NOM
+	      | (^ CASE) = ACC }
+	      (^ ANIM) = +.
+
+băiatul  N  * (^ PRED) = 'BOY'
+	      (^ NTYPE) = COUNT
+	      (^ NUM) = SG
+	      (^ GEN) = M
+	      (^ PERS) = 3
+	      (^ DEF) = +
+	      (^ ART) = +
+	      { (^ CASE) = NOM
+	      | (^ CASE) = ACC }
+	      (^ ANIM) = +.
+
+măr      N  * (^ PRED) = 'APPLE'
+	      (^ NTYPE) = COUNT
+	      (^ NUM) = SG
+	      (^ GEN) = N
+	      (^ PERS) = 3
+	      (^ ART) = -
+	      { (^ CASE) = NOM
+	      | (^ CASE) = ACC }
+	      (^ ANIM) = -.
+
+mărul    N  * (^ PRED) = 'APPLE'
+	      (^ NTYPE) = COUNT
+	      (^ NUM) = SG
+	      (^ GEN) = N
+	      (^ PERS) = 3
+	      (^ DEF) = +
+	      (^ ART) = +
+	      { (^ CASE) = NOM
+	      | (^ CASE) = ACC }
+	      (^ ANIM) = -.
+
+
+mere     N  * (^ PRED) = 'APPLE'
+	      (^ NTYPE) = COUNT
+	      (^ NUM) = PL
+	      (^ GEN) = N
+	      (^ PERS) = 3
+	      (^ ART) = -
+	      { (^ CASE) = NOM
+	      | (^ CASE) = ACC }
+	      (^ ANIM) = -.
+
+merele   N  * (^ PRED) = 'APPLE'
+	      (^ NTYPE) = COUNT
+	      (^ NUM) = PL
+	      (^ GEN) = N
+	      (^ PERS) = 3
+	      (^ DEF) = +
+	      (^ ART) = +
+	      { (^ CASE) = NOM
+	      | (^ CASE) = ACC }
+	      (^ ANIM) = -.
+
+Andrei   N  * (^ PRED) = 'ANDREW'
+	      (^ NUM) = SG
+	      (^ GEN) = M
+	      (^ PERS) = 3
+	      (^ DEF) = +
+	      (^ ART) = -
+	      (^ ANIM) = +
+	      (^ NTYPE) = PROPER.
+
+Ana      N  * (^ PRED) = 'ANNE'
+	      (^ NUM) = SG
+	      (^ GEN) = F
+	      (^ PERS) = 3
+	      (^ DEF) = +
+	      (^ ART) = -
+	      (^ ANIM) = +
+	      (^ NTYPE) = PROPER.
+
+mănâncă  V  * { (^ PRED) = 'EAT<(^ SUBJ)(^ OBJ)>'
+	      	"(^ OBJ ANIM) = -"
+		(^ OBJ CASE) =c ACC
+ 	      |(^ PRED) = 'EAT<(^ SUBJ)>' }
+	      { (^ SUBJ PRED) = 'pro' }
+	      (^ SUBJ NUM) = SG
+              (^ SUBJ PERS) = 3
+	      "(^ SUBJ ANIM) = +"	  
+              (^ TENSE) = PRES.
+
+iubește  V  * { (^ PRED) = 'LOVE<(^ SUBJ)(^ OBJ)>'
+	        (^ OBJ CASE) =c ACC
+ 	      | (^ PRED) = 'LOVE<(^ SUBJ)>' }
+	      { (^ SUBJ PRED) = 'pro' }
+	      (^ SUBJ NUM) = SG
+              (^ SUBJ PERS) = 3
+	      "(^ SUBJ ANIM) = +"
+              (^ TENSE) = PRES.
+
+dansez  V  * (^ PRED) = 'DANCE<(^ SUBJ)>' 
+	      (^ SUBJ NUM) = SG
+              (^ SUBJ PERS) = 1
+	      "(^ SUBJ ANIM) = +"
+              (^ TENSE) = PRES.
+
+dansezi V  * (^ PRED) = 'DANCE<(^ SUBJ)>' 
+	      (^ SUBJ NUM) = SG
+              (^ SUBJ PERS) = 2
+	      "(^ SUBJ ANIM) = +"
+              (^ TENSE) = PRES.
+
+dansează V  * (^ PRED) = 'DANCE<(^ SUBJ)>' 
+	      {(^ SUBJ NUM) = SG
+	      |(^ SUBJ NUM) = PL}
+              (^ SUBJ PERS) = 3
+	      "(^ SUBJ ANIM) = +"
+              (^ TENSE) = PRES.
+
+dansăm   V  * (^ PRED) = 'DANCE<(^ SUBJ)>' 
+	      (^ SUBJ NUM) = PL
+              (^ SUBJ PERS) = 1
+	      "(^ SUBJ ANIM) = +"
+              (^ TENSE) = PRES.
+
+dansați V  * (^ PRED) = 'DANCE<(^ SUBJ)>' 
+	      (^ SUBJ NUM) = PL
+              (^ SUBJ PERS) = 2
+	      "(^ SUBJ ANIM) = +"
+              (^ TENSE) = PRES.
+
+îl     Dhat * { "pronoun"
+       	      (^ PRED) = 'pro'
+     	      (^ PERS) = 3
+	      (^ NUM) = SG
+	      (^ GEN) = M
+	      (^ CASE) = ACC
+	      (^ DEF) = +
+    	      |  "agreement marker"
+	      (^ PERS) = 3
+	      (^ NUM) = SG
+	      (^ GEN) = M
+	      (^ CASE) =c ACC
+	      (^ DEF) = +
+	      {(^ ART) ~= +
+	      |(^ DEM) = +
+	       (^ FORM) = LONG
+	      }
+	    }.
+
+o     Dhat * { "pronoun"
+       	      (^ PRED) = 'pro'
+     	      (^ PERS) = 3
+	      (^ NUM) = SG
+	      (^ GEN) = F
+	      (^ CASE) = ACC
+	      (^ DEF) = +
+    	      | "agreenent marker"
+	      (^ PERS) = 3
+	      (^ NUM) = SG
+	      (^ GEN) = F
+	      (^ CASE) =c ACC
+	      (^ DEF) = +
+	      {(^ ART) ~= +
+	      |(^ DEM) = +
+	       (^ FORM) = LONG
+	      }
+	      };
+	DET * (^ DEF) = -
+	      (^ NUM) = SG
+	      (^ GEN) = F.
+
+un      DET * (^ DEF) = -
+	      (^ NUM) = SG
+	      { (^ GEN) = M
+	      | (^ GEN) = N }.
+
+niște   DET * (^ DEF) = -
+       	      (^ NUM) = PL.
+
+acest   DET * (^ DEF) = +
+       	      (^ PROX) = +
+	      (^ DEM) = +
+	      (^ NUM) = SG
+	      { (^ GEN) = M
+	      | (^ GEN) = N }
+	      (^ FORM) = SHORT.
+
+acesta  DET * (^ DEF) = +
+       	      (^ PROX) = +
+	      (^ DEM) = +
+	      (^ NUM) = SG
+	      { (^ GEN) = M
+	      | (^ GEN) = N }
+	      (^ FORM) = LONG.
+
+această DET * (^ DEF) = +
+       	      (^ PROX) = +
+	      (^ DEM) = +
+	      (^ NUM) = SG
+	      (^ GEN) = F
+	      (^ FORM) = SHORT.
+
+aceasta DET * (^ DEF) = +
+       	      (^ PROX) = +
+	      (^ DEM) = +
+	      (^ NUM) = SG
+	      (^ GEN) = F	    
+	      (^ FORM) = LONG.
+
+acești  DET * (^ DEF) = +
+       	      (^ PROX) = +
+	      (^ DEM) = +
+	      (^ NUM) = PL
+	      (^ GEN) = M
+	      (^ FORM) = SHORT.
+
+aceștia DET * (^ DEF) = +
+       	      (^ PROX) = +
+	      (^ DEM) = +
+	      (^ NUM) = PL
+	      
+	      (^ FORM) = LONG.
+
+aceste  DET * (^ DEF) = +
+       	      (^ PROX) = +
+	      (^ DEM) = +
+	      (^ NUM) = PL
+	      { (^ GEN) = F
+	      | (^ GEN) = N }
+	      (^ FORM) = SHORT.
+
+acestea DET * (^ DEF) = +
+       	      (^ PROX) = +
+	      (^ DEM) = +
+	      (^ NUM) = PL
+	      { (^ GEN) = F
+	      | (^ GEN) = N }	    
+	      (^ FORM) = LONG.
+
+pe      PRT * (^ CASE) = ACC.
+	            
+----
+
+

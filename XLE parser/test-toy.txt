@@ -1,0 +1,122 @@
+
+
+set-character-encoding stdio utf-8
+create-parser toy-ro.lfg
+
+
+parse {fata mănâncă}
+parse {mănâncă fata}
+parse {o fată mănâncă}
+parse {fata mănâncă un măr}
+parse {fata mănâncă mărul}
+parse {un măr mănâncă fata}
+parse {mănâncă}
+
+parse {mănâncă niște mere}
+
+parse {fata iubește băiatul}
+parse {fata iubește un băiat}
+
+parse {DP: fata}
+parse {DP: fată}
+parse {DP: băiatul}
+parse {DP: o fată}
+parse {DP: un băiat}
+parse {DP: un măr}
+parse {DP: niște mere}
+parse {DP: Andrei}
+
+parse {DP: acest băiat}
+parse {DP: băiatul acesta}
+parse {DP: această fată}
+parse {DP: fata aceasta}
+parse {DP: aceste mere}
+
+parse {DP: pe Andrei}
+parse {DP: pe acest băiat}
+parse {DP: pe băiatul acesta}
+
+
+parse {Andrei dansează}
+parse {această fată dansează}
+parse {dansează fata}
+parse {Andrei mănâncă un măr}
+parse {Andrei îl mănâncă}
+parse {fata îl iubește pe Andrei}
+parse {Andrei o iubește pe Ana}
+parse {fata iubește un băiat}
+parse {fata îl iubește pe acest băiat}
+parse {Ana o iubește pe fata aceasta}
+parse {fata îl iubește pe băiatul acesta}
+parse {iubește băiatul}
+parse {fata iubește băiatul}
+
+parse {pe Ana Andrei o iubește}
+
+UNGRAMMATICAL:
+parse {fata mănâncă fata} 	
+parse {mărul mănâncă fata}	
+parse {fată mănâncă}	
+parse {fata dansez}	
+
+parse {DP: Andrei acesta}	
+parse {DP: un fată}	
+parse {DP: un băiatul}
+parse {DP: acest băiatul}
+parse {DP: acest un băiat}
+parse {DP: această băiat}
+parse {DP: această băiatul}
+parse {DP: băiatul acest}
+parse {DP: băiat acesta}
+parse {DP: un băiat acesta}
+parse {DP: băiatul aceasta}
+parse {DP: această măr}
+parse {DP: acești mere}
+parse {DP: pe mărul acesta}
+parse {DP: pe băiatul}
+parse {DP: pe un băiat}
+
+parse {Andrei îl mănâncă un măr}	
+parse {Andrei îl mănâncă pe măr}	 
+parse {fata îl iubește Andrei}		
+parse {fata îl iubește pe un băiat}	
+parse {fata îl iubește un băiat}	
+parse {fata îl iubește pe Ana}		
+parse {fata îl dansează}		
+parse {fata îl iubește băiatul} 	
+parse {fata îl iubește pe băiatul} 	
+parse {fata iubește pe un băiat}	
+parse {fata iubește pe băiatul} 	
+parse {Andrei mănâncă pe măr}		 
+	
+parse {fata iubește pe un băiat}	
+parse {fata îl iubește băiatul}	
+parse {pe această fată dansează}
+parse {fata iubește pe Andrei}		
+parse {fata iubește pe acest băiat} 	
+
+parse {mănâncă pe un măr}
+parse {mănâncă pe acest măr}
+parse {îl mănâncă pe acest măr}
+parse {îl mănâncă acest măr}
+
+parse {iubește pe o fată}
+parse {o iubește pe o fată}
+parse {iubește pe această fată}
+parse {iubește pe Andrei}
+
+parse {iubește pe băiatul}
+parse {îl iubește pe băiatul}
+
+
+--------------------
+parse {fata iubește Andrei}
+parse {mărul mănâncă fata}
+No object:
+
+parse {o iubește o fată}
+parse {iubește această fată}
+parse {o iubește această fată}
+parse {iubește Andrei}
+parse {îl iubește Andrei}
+parse {îl iubește băiatul}
