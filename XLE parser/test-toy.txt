@@ -1,9 +1,3 @@
-
-
-set-character-encoding stdio utf-8
-create-parser toy-ro.lfg
-
-
 parse {fata mănâncă}
 parse {mănâncă fata}
 parse {o fată mănâncă}
@@ -50,7 +44,12 @@ parse {Ana o iubește pe fata aceasta}
 parse {fata îl iubește pe băiatul acesta}
 parse {iubește băiatul}
 parse {fata iubește băiatul}
-
+parse {o iubește o fată}
+parse {iubește această fată}
+parse {o iubește această fată}
+parse {iubește Andrei}
+parse {îl iubește Andrei}
+parse {îl iubește băiatul}
 parse {pe Ana Andrei o iubește}
 
 UNGRAMMATICAL:
@@ -109,14 +108,4 @@ parse {iubește pe băiatul}
 parse {îl iubește pe băiatul}
 
 
---------------------
-parse {fata iubește Andrei}
-parse {mărul mănâncă fata}
-No object:
 
-parse {o iubește o fată}
-parse {iubește această fată}
-parse {o iubește această fată}
-parse {iubește Andrei}
-parse {îl iubește Andrei}
-parse {îl iubește băiatul}
