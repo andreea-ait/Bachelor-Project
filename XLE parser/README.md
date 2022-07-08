@@ -1,6 +1,6 @@
 # XLE Parser
 
-After installing XLE, follow the provided instructions to run the Romanian parser.
+After installing XLE, follow the provided instructions to run the Romanian parser. 
 
 1. open the terminal in the directory containing the parser
 2. run `xle`
@@ -26,3 +26,5 @@ parse {DP: a sentence}
 parse-testfile "grammatical.txt"
 parse-testfile "ungrammatical.txt"
 ```
+
+All the necessary files can be found in the `XLE parser` directory. The `grammatical.txt` and `ungrammatical.txt` can be used for testing all the sentences in the files. The `test-toy.txt` provides commands that can be directly used in the XLE shell to parse individual sentences or phrase structues.
