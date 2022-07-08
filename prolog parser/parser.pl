@@ -1,5 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%  from here you should not change anything  %%%%
+% Retrieved from the Computational Grammar course, 
+% Assignment 2 (Kreutz, personal communication, 2022)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 test :-

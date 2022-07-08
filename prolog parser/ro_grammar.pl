@@ -1,6 +1,6 @@
 %%% RULES
 
-% ip -> (Subj), Verb                                    
+%% ip -> (Subj), Verb                                    
 ip(t(ip, [SUBJ, VP])) --> 
     dp_subj(SUBJ, PERS, NUM, _), 
     vp(VP, PERS, NUM, _).
@@ -12,6 +12,7 @@ ip(t(ip, [VP, SUBJ])) -->
 ip(t(ip, [VP])) --> 
     vp(VP, _, _, _).
 
+% ip containing clitics
 ip(t(ip, [SUBJ, VP])) --> 
     dp_subj(SUBJ, PERS0, NUM0, _), 
     vp2(VP, PERS0, NUM0, _, _, _, acc).
@@ -37,7 +38,7 @@ vp(t(vp, [OBJ, VERB]), PERS, NUM, trans) -->
     verb(VERB, PERS, NUM, trans).
 
 
-%% vp2
+%% vp2 (with clitics)
 vpcl(t(vp, [CL, VERB]), PERS0, NUM0, PERS, NUM, GEN, CASE) -->
     clit(CL, PERS, NUM, GEN, CASE),
     verb(VERB, PERS0, NUM0, trans).
@@ -56,14 +57,13 @@ vp2(t(vp, [CL, VP]), PERS0, NUM0, PERS, NUM, GEN, CASE) -->
 
 %% dp
 dp(t(dp, [NOUN]), p3, NUM, GEN, CASE, DEF, ANIM) --> noun(NOUN, DEF, NUM, GEN, CASE, ANIM).
-dp(t(dp, [PRONOUN]), PERS, NUM, GEN, nom, def, anim) --> pronoun(PRONOUN, PERS, NUM, GEN, nom).
-dp(t(dp, [PRONOUN]), PERS, NUM, GEN, acc, def, anim) --> pronoun(PRONOUN, PERS, NUM, GEN, acc).
+dp(t(dp, [PRONOUN]), PERS, NUM, GEN, CASE, def, anim) --> pronoun(PRONOUN, PERS, NUM, GEN, CASE).
 dp(t(dp, [PROPN]), p3, NUM, GEN, CASE, def, ANIM) --> propn(PROPN, NUM, GEN, CASE, ANIM).
 
-dp(t(dp, [DET, NOUN]), p3, NUM, GEN, CASE, indef, ANIM) --> \+ det(DET, indef, sg, fem, gen, _), 
-    det(DET, indef, NUM, GEN, CASE, _), noun(NOUN, no, NUM, GEN, nom, ANIM).
-dp(t(dp, [DET, NOUN]), p3, NUM, GEN, CASE, def, ANIM) --> \+ det(DET, indef, sg, fem, gen, _), 
-    det(DET, def, NUM, GEN, CASE, short), noun(NOUN, no, NUM, GEN, nom, ANIM).
+dp(t(dp, [DET, NOUN]), p3, NUM, GEN, CASE, indef, ANIM) --> det(DET, indef, NUM, GEN, CASE, _), 
+    noun(NOUN, no, NUM, GEN, nom, ANIM).
+dp(t(dp, [DET, NOUN]), p3, NUM, GEN, CASE, def, ANIM) --> det(DET, def, NUM, GEN, CASE, short), 
+    noun(NOUN, no, NUM, GEN, nom, ANIM).
 dp(t(dp, [NOUN, DET]), p3, NUM, GEN, CASE, def, ANIM) --> noun(NOUN, defm, NUM, GEN, CASE, ANIM), 
     det(DET, def, NUM, GEN, CASE, long).
 
@@ -160,26 +160,15 @@ l_clit(îl, p3, sg, masc, acc).
 l_clit(o, p3, sg, fem, acc).
 
 
-
 %% verbs
 verb(t(verb, [w(Word)]), PERS, NUM, TRANS) --> [Word], {l_verb(Word, PERS, NUM, TRANS)}.
 
 % (VERB, PERS, NUM, TRANSITIVE)
 % eat
-l_verb(mănânc, p1, sg, trans).
-l_verb(mănânci, p2, sg, trans).
 l_verb(mănâncă, p3, sg, trans).
-l_verb(mâncăm, p1, pl, trans).
-l_verb(mâncați, p2, pl, trans).
-l_verb(mănâncă, p3, pl, trans).
 
 % love
-l_verb(iubesc, p1, sg, trans).
-l_verb(iubești, p2, sg, trans).
 l_verb(iubește, p3, sg, trans).
-l_verb(iubim, p1, pl, trans).
-l_verb(iubiți, p2, pl, trans).
-l_verb(iubesc, p3, pl, trans).
 
 % dance
 l_verb(dansez, p1, sg, intrans).
@@ -268,35 +257,3 @@ ungrammatical(41, [iubește,pe,andrei]).
 ungrammatical(42, [iubește,pe,băiatul]).
 ungrammatical(43, [îl,iubește,pe,băiatul]).
 ungrammatical(44, [fata,îl,iubește,băiatul]).
-% ungrammatical(23, []).
-% ungrammatical(24, []).
-% ungrammatical(25, []).
-% ungrammatical(26, []).
-% ungrammatical(27, []).
-% ungrammatical(28, []).
-% ungrammatical(29, []).
-% ungrammatical(30, []).
-
-% ungrammatical( 1, [el,iubesc]).
-% ungrammatical( 2, [eu,o,iubesc,pe,el]).
-% ungrammatical( 3, [îl,mănânc,pe,măr]).
-% ungrammatical( 4, [ei,mănâncă,îl]).
-% ungrammatical( 5, [îl,iubește,pe,băiatul]).
-% ungrammatical( 6, [fată,mănâncă]).
-% ungrammatical( 7, [fata,îl,mănâncă,pe,măr]).
-% ungrammatical( 8, [fata,îl,mănâncă,un,măr]).
-% ungrammatical( 9, [fata,îl,iubește,andrei]).
-% ungrammatical(10, [fata,îl,iubește,un,băiat]).
-% ungrammatical(11, [fata,îl,iubește,pe,un,băiat]).
-% ungrammatical(12, [fata,îl,iubește,pe,ana]).
-% ungrammatical(13, [fata,îl,dansează]).
-% ungrammatical(14, [fata,îl,iubește,pe,băiatul]).
-% ungrammatical(15, [fata,iubește,pe,un,băiat]).
-% ungrammatical(16, [fata,iubește,pe,băiatul]).
-% ungrammatical(17, [andrei,mănâncă,pe,măr]).
-% ungrammatical(18, [fata,iubește,andrei]).
-% ungrammatical(19, [fata,iubește,pe,un,băiat]).
-% ungrammatical(20, [fata,iubește,pe,andrei]).
-% ungrammatical(21, [fata,îl,iubește,băiatul]).
-% ungrammatical(22, [fata,iubește,pe,acest,băiat]).
-% ungrammatical(23, [fata,dansează,un,băiat]).
